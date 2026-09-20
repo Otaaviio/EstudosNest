@@ -1,0 +1,20 @@
+@baseUrl = http://127.0.0.1:3000
+
+### AppControllerGetHello
+# @name AppControllerGetHello
+GET {{baseUrl}}/app/hello
+
+
+### AppControllerGetRotaExemplo
+# @name AppControllerGetExemplo
+GET http://127.0.0.1:3000/app/exemplo
+
+
+### ConceitosManualController
+# @name ConceitosManualController
+GET {{baseUrl}}/conceitos-manual/hello
+
+
+### ConceitosAutomaticoController
+# @name ConceitosAutomaticoController
+GET {{baseUrl}}/conceitos-automatico/hello
