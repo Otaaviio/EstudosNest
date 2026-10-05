@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpException, HttpStatus, NotFoundException, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { RecadosService } from './recados.service';
 import { CriaRecadoDto } from './dto/cria-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recado.dto';

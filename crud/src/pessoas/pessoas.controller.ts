@@ -7,28 +7,28 @@ import { UpdatePessoaDto } from './dto/update-pessoa.dto';
 export class PessoasController {
   constructor(private readonly pessoasService: PessoasService) {}
 
-  @Post()
-  create(@Body() createPessoaDto: CreatePessoaDto) {
-    return this.pessoasService.create(createPessoaDto);
-  }
-
   @Get()
   findAll() {
     return this.pessoasService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.pessoasService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.pessoasService.findOne(id);
+  }
+  
+  @Post()
+  create(@Body() createPessoaDto: CreatePessoaDto) {
+    return this.pessoasService.create(createPessoaDto);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePessoaDto: UpdatePessoaDto) {
-    return this.pessoasService.update(+id, updatePessoaDto);
+  update(@Param('id') id: number, @Body() updatePessoaDto: UpdatePessoaDto) {
+    return this.pessoasService.update(id, updatePessoaDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.pessoasService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.pessoasService.remove(id);
   }
 }

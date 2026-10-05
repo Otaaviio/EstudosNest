@@ -7,11 +7,4 @@ export class CriaRecadoDto {
     @MinLength(5)
     readonly texto: string;
     
-    @IsString()
-    @IsNotEmpty()
-    readonly de: string;
-    
-    @IsString()
-    @IsNotEmpty()
-    readonly para: string;
 }

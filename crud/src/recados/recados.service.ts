@@ -43,7 +43,8 @@ export class RecadosService {
     const partial = {
       lido: updateRecadoDto?.lido,
       texto: updateRecadoDto?.texto
-    }
+    };
+    
     const recado = await this.recadoRepository.preload({
       id,
       ...partial

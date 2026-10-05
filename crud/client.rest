@@ -32,3 +32,30 @@ Content-Type: application/json
 
 ###
 DELETE {{baseUrl}}/recados/2
+
+###
+GET {{baseUrl}}/pessoas
+
+###
+PATCH {{baseUrl}}/pessoas/2
+Content-Type: application/json
+
+{
+  "texto": "novo recado",
+  "de": "João",
+  "para": "Maria",
+  "lido": true
+}
+
+###
+POST {{baseUrl}}/pessoas
+Content-Type: application/json
+
+{
+  "nome": "Otávio",
+  "email": "otavio@email.com",
+  "senha": "Otavio098!"
+}
+
+###
+DELETE {{baseUrl}}/pessoas/3
