@@ -4,21 +4,27 @@ import { CriaRecadoDto } from './dto/cria-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { PessoasService } from '../pessoas/pessoas.service';
 
 @Injectable()
 export class RecadosService {
   constructor(
     @InjectRepository(RecadoEntity)
     private readonly recadoRepository: Repository<RecadoEntity>,
+    private readonly pessoaService: PessoasService,
   ) {}
 
-  findAll() {
-    return this.recadoRepository.find();
+  async findAll() {
+    const recados = await this.recadoRepository.find({
+      relations: { de: true, para: true }
+    });
+    return recados;
   }
 
   async findOne(id: number) {
     const recado = await this.recadoRepository.findOne({
-      where: { id: id }
+      where: { id: id },
+      relations: { de: true, para: true }
     }) 
 
     if (recado) return recado
@@ -28,15 +34,33 @@ export class RecadosService {
 
   async create(createRecadoDto: CriaRecadoDto) {
     
+    const {deId, paraId} = createRecadoDto;
+
+    const [de, para] = await Promise.all([
+      this.pessoaService.findOne(deId),
+      this.pessoaService.findOne(paraId)
+    ])
+
     const novoRecado = {
-      ...createRecadoDto,
+      texto: createRecadoDto.texto,
+      de,
+      para,
       lido: false,
       data: new Date()
     }
     
     const recado = await this.recadoRepository.create(novoRecado);
+    await this.recadoRepository.save(recado);
 
-    return this.recadoRepository.save(recado);
+    return {
+      ...recado,
+      de: {
+        id: recado.de.id,
+      },
+      para: {
+        id: recado.para.id,
+      }
+    };
   }
 
   async update(id: number, updateRecadoDto: UpdateRecadoDto) {

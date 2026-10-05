@@ -28,5 +28,5 @@ export class RecadoEntity {
     
     @ManyToOne(() => Pessoa)
     @JoinColumn({ name: 'para'  })
-    para: string;
+    para: Pessoa;
 }

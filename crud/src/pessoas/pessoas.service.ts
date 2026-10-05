@@ -22,8 +22,8 @@ export class PessoasService {
     });
   }
 
-  findOne(id: number) {
-    const pessoa = this.pessoaRepository.findOne({
+  async findOne(id: number) {
+    const pessoa = await this.pessoaRepository.findOne({
       where: { id: id }
     });
 

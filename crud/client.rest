@@ -25,9 +25,8 @@ Content-Type: application/json
 
 {
   "texto": "novo recado",
-  "de": "João",
-  "para": "Maria",
-  "lido": true
+  "deId": "João",
+  "paraId": "Maria",
 }
 
 ###
