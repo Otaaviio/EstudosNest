@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Pessoa } from './entities/pessoa.entity';
 import { Repository } from 'typeorm';
 import e from 'express';
+import { PaginationDto } from '../common/dto/pagination.dto';
 
 
 @Injectable()
@@ -14,8 +15,12 @@ export class PessoasService {
     private readonly pessoaRepository: Repository<Pessoa>,
   ) {}
 
-  findAll() {
+  findAll(paginationDto: PaginationDto) {
+    const { limit = 10, offset = 0 } = paginationDto
+
     return this.pessoaRepository.find({
+      take: limit,
+      skip: offset,
       order: {
         id: 'DESC'
       }
