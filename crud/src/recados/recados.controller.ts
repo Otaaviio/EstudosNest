@@ -1,10 +1,11 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query, UsePipes } from '@nestjs/common';
 import { RecadosService } from './recados.service';
 import { CriaRecadoDto } from './dto/cria-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
 import { PaginationDto } from '../common/dto/pagination.dto';
 
 @Controller('recados')
+@UsePipes(ParseIntPipe)
 export class RecadosController {
   constructor(private readonly recadosService: RecadosService){}
 
@@ -15,7 +16,7 @@ export class RecadosController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param('id') id: number) {
     return this.recadosService.findOne(id);
   }
 
@@ -25,12 +26,12 @@ export class RecadosController {
   }
 
   @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() updateRecadoDto: UpdateRecadoDto) {
+  update(@Param('id') id: number, @Body() updateRecadoDto: UpdateRecadoDto) {
     return this.recadosService.update(id, updateRecadoDto);
   }
 
   @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number) {
+  delete(@Param('id') id: number) {
     return this.recadosService.delete(id);
   }
 
